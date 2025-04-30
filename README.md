@@ -25,6 +25,10 @@ The stick uses an ultrasonic sensor to detect obstacles up to a distance of 25 c
 
 These alerts notify the user of nearby obstructions, helping them avoid collisions.
 
+### Circuit Diagram
+
+![Circuit Diagram](Diagram.jpg)
+
 ### Arduino Code:
 const int trigPin = 9;<br>
 const int echoPin = 10;<br>

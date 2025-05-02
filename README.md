@@ -1,81 +1,100 @@
-# Smart-Blind-Walking-Stick-using-Arduino
-A cost-effective and functional walking stick designed to assist visually impaired individuals using Arduino and ultrasonic technology. It detects nearby obstacles and alerts the user via buzzer, LED, and vibrations.
+# 🦯 Smart Blind Walking Stick using Arduino
 
-### Objective:
-To develop a smart walking stick that can alert visually impaired individuals to nearby obstacles, thereby helping them navigate safely and independently.
+A cost-effective and functional walking stick designed to assist visually impaired individuals using Arduino and ultrasonic technology. It detects nearby obstacles and alerts the user via **buzzer**, **LED**, and **vibration motor**.
 
-### Components Used:
-	•	Arduino Uno
-	•	HC-SR04 Ultrasonic Sensor
-	•	Buzzer
-	•	Vibration Motor
-	•	LED with 220Ω resistor
-	•	Jumper Wires
-	•	PVC Pipe
-	•	Battery Holder & Rechargeable Battery
-	•	Cable Ties
+---
 
-### Working Principle:
+## 🎯 Objective
 
-The stick uses an ultrasonic sensor to detect obstacles up to a distance of 25 cm. When an object is detected:
+To develop a smart walking stick that can alert visually impaired individuals to nearby obstacles, helping them navigate safely and independently.
 
-	•	The buzzer beeps.
-	•	The LED lights up.
-	•	The vibration motor activates (inferred from report, although not coded in the current version).
+---
+
+## 🔩 Components Used
+
+- Arduino Uno  
+- HC-SR04 Ultrasonic Sensor  
+- Buzzer  
+- Vibration Motor  
+- LED with 220Ω resistor  
+- Jumper Wires  
+- PVC Pipe  
+- Battery Holder & Rechargeable Battery  
+- Cable Ties  
+
+---
+
+## ⚙️ Working Principle
+
+The stick uses an **ultrasonic sensor** to detect obstacles up to a distance of **25 cm**. When an object is detected:
+
+- 🔊 The buzzer beeps  
+- 💡 The LED lights up  
+- 🔘 The vibration motor activates *(optional, if connected)*
 
 These alerts notify the user of nearby obstructions, helping them avoid collisions.
 
-### Circuit Diagram
+---
+
+## 🔌 Circuit Diagram
 
 ![Circuit Diagram](Diagram.jpg)
 
-### Arduino Code:
-const int trigPin = 9;<br>
-const int echoPin = 10;<br>
-const int buzzer = 11;<br>
-const int ledPin = 13;<br>
+---
 
-long duration;<br>
-int distance;<br>
-int safetyDistance;<br>
+## 💻 Arduino Code
 
-void setup() {<br>
-  pinMode(trigPin, OUTPUT);<br>
-  pinMode(echoPin, INPUT);<br>
-  pinMode(buzzer, OUTPUT);<br>
-  pinMode(ledPin, OUTPUT);<br>
-  Serial.begin(9600);<br>
-}<br>
+```cpp
+const int trigPin = 9;
+const int echoPin = 10;
+const int buzzer = 11;
+const int ledPin = 13;
 
-void loop() {<br>
-  digitalWrite(trigPin, LOW);<br>
-  delayMicroseconds(2);<br>
-  digitalWrite(trigPin, HIGH);<br>
-  delayMicroseconds(10);<br>
-  digitalWrite(trigPin, LOW);<br>
+long duration;
+int distance;
+int safetyDistance;
 
-  duration = pulseIn(echoPin, HIGH);<br>
-  distance = duration * 0.034 / 2;<br>
-  safetyDistance = distance;<br>
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
 
-  if (safetyDistance <= 25) {<br>
-    digitalWrite(buzzer, HIGH);<br>
-    digitalWrite(ledPin, HIGH);<br>
-  } else {<br>
-    digitalWrite(buzzer, LOW);<br>
-    digitalWrite(ledPin, LOW);<br>
-  }<br>
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
 
-  Serial.print("Distance: ");<br>
-  Serial.println(distance);<br>
-}<br>
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  safetyDistance = distance;
 
-### Result:
+  if (safetyDistance <= 25) {
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(ledPin, HIGH);
+  } else {
+    digitalWrite(buzzer, LOW);
+    digitalWrite(ledPin, LOW);
+  }
+
+  Serial.print("Distance: ");
+  Serial.println(distance);
+}
+```
+
+---
+
+## ✅ Result
 
 When an obstacle is detected within 25 cm:
+- 💡 The LED lights up  
+- 🔊 The buzzer beeps  
+- 🧠 The user is effectively alerted
 
-	•	The LED lights up,
-	•	The buzzer beeps,
-	•	And the user is alerted effectively.
+If the path is clear, all alerts remain off.
 
-No alert is triggered if the path is clear.
+---
